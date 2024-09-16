@@ -102,6 +102,9 @@ void Decrypt(char *pszFile, char *pszSecret)
     ifstream          in(pszFile, ios::in | ios::binary | ios::ate);
     ofstream          out;
     IEncryptedDataPtr encryptor;
+    
+    //the option ios::ate makes the open operation point the file pointer to the end of the file.
+    // When we are at the end of the file, we can determine the file size
 
     if ( !in.is_open() )
         cout << szErrNoFile << std::endl;
