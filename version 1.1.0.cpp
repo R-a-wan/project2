@@ -28,7 +28,8 @@ void Decrypt(char *pszFile, char *pszKey);
 int main(int argc, char **argv)
 {
     char c;
-    CoInitialize(0);
+    CoInitialize(0);  //has to be called in every single thread that uses COM, regardless of what thread it is,
+                      //or whether it has a parent thread or child threads
     if ( argc != 4 )
         cout << szErrParms << endl;
     else
