@@ -1,3 +1,5 @@
+//This version is without opening file in binary mode
+
 #include <bits/stdc++.h>
 #include<fstream>
 using namespace std;
