@@ -1,89 +1,59 @@
-//This version is without opening file in binary mode
 
-#include <bits/stdc++.h>
-#include<fstream>
+#include <iostream>
+#include <filesystem>
+#include <conio.h>
 using namespace std;
-
-class encdec{
-
-    int key;
-    string file;
-    char c;
-
-public:
-    void encrypt();
-    void decrypt();
-
-};
-
-void encdec ::encrypt(string file){
-
-     cout<<"Key : ";
-     cin>>key;
-
-     fstream fin,fout;
-
-     fin.open(file, fstream::in);
-     fout.open("encrypt.txt", fstream::out);
-
-     while (fin >> noskipws >> c) {
-        int temp = (c + key);
-
-        // Write temp as char in
-        // output file
-        fout << (char)temp;
-    }
-
-    // Closing both files
-    fin.close();
-    fout.close();
-}
-
-void encdec::decrypt(string file)
-{
-    cout << "key: ";
-    cin >> key;
-    fstream fin;
-    fstream fout;
-    fin.open(file, fstream::in);
-    fout.open("decrypt.txt", fstream::out);
-
-    while (fin >> noskipws >> c) {
-
-        // Remove the key from the
-        // character
-        int temp = (c - key);
-        fout << (char)temp;
-    }
-
-    fin.close();
-    fout.close();
-}
 
 int main()
 {
-    string filePath;
-    getline(cin,filePath);
+    int ans;
+    cout<<"press 1 to encrypt , 2 to decrypt\n";
+    cin>>ans;
 
-    cout<<"Type E if you want to encrypt the file, \n But to decrypt type D: \n";
-    char ch;
-    cin>>ch;
+    cout<<"Enter file name: \n";
+    string fname;
+    getline(cin,fname);
 
-    switch(ch){
-    case 'E':
-    case 'e':
-        encdec ::encrypt(filePath);
-        if(encdec ::encrypt(filePath)){
-            cout<<"file encrypted successfully";
+    cout<<"Enter key: \n";
+    int key;
+    cin>>key;
+
+    if( ans == 1 ){
+
+        char c;
+        ifstream in;
+        ofstream ou;
+        in.open(fname.c_str(),ios::binary);
+        in = "output";
+
+        ou.open(fname.c_str(),ios::binary);
+
+        while(!in.eof()){
+            in>>noskipws>>c;
+            int temp = (c + key);
+            ou<<(char)temp;
+
         }
-        break;
-    case 'D':
-    case 'd':
-        encdec ::decrypt(filePath);
-        if(encdec ::decrypt(filePath)){
-            cout<<"file decrypted successfully";
+        in.close();
+        ou.close();
+    }
+    else if( ans == 2 ){
+        char c;
+        ifstream in;
+        ofstream ou;
+        in.open(fname.c_str(),ios::binary);
+        in = "output";
+
+        ou.open(fname.c_str(),ios::binary);
+
+        while(!in.eof()){
+            in>>noskipws>>c;
+            int temp = (c - key);
+            ou<<(char)temp;
+
         }
-        break;
+        in.close();
+        ou.close();
 
     }
 
