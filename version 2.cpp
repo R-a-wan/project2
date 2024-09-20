@@ -12,7 +12,7 @@ void processFile(const std::string& filename, int key) {
         return;
     }
     filesystem::path filePath = filename;
-
+ 
     if (filePath.extension().c_str()==".png"){
         // Read the PNG signature (first 8 bytes)
          unsigned char pngSignature[8];
@@ -37,20 +37,7 @@ void processFile(const std::string& filename, int key) {
          }
 
     }
-     else if (filePath.extension().c_str()=="."){
-        // Read the pdf signature (first 8 bytes)
-         unsigned char pdfSignature[8];
-         file.read(reinterpret_cast<char*>(pdfSignature), 8);
-    
-         // Check if it's a Pdf file (signature should be 25 50 44 46 2D 31 2E 35 )
-         const unsigned char pngMagic[8] = {0x25, 0x50, 0x44, 0x46, 0x2D, 0x31, 0x2E, 0x35};
-         if (memcmp(pngSignature, pngMagic, 8) != 0) {
-             std::cerr << "The file is not a valid pdf file!" << std::endl;
-         }
 
-    }
-    
-    
     // Read the next byte to check if the file is already encrypted (we'll use this as our custom flag)
     char flag;
     file.read(&flag, 1);
