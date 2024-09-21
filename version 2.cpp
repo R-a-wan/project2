@@ -84,7 +84,7 @@ int main() {
     std::string filename;
     int key;
 
-    std::cout << "Enter the filename (PNG file): ";
+    std::cout << "Enter the filename (PNG file) or (PDF file): ";
     std::cin >> filename;
 
     std::cout << "Enter the encryption key: ";
